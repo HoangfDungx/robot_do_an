@@ -3,6 +3,9 @@
     file="$(find gazebo_ros)/launch/empty_world.launch" />
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find robot_do_an)/config/joint_names_robot_do_an.yaml" command="load"/>
+  <param
+    name="robot_description"
+    textfile="$(find robot_do_an)/urdf/robot_do_an.urdf" />
   <!-- load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" ns="/robot_do_an" args="left_wheel_controller right_wheel_controller joint_state_controller"/>
