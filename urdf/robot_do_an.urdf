@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="robot_do_an">
+  <link name="base_footprint">
+    <inertial>
+      <mass value="0.0001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+  </link>
+  <gazebo reference="base_footprint">
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  <joint name="base_footprint_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.04"/>
+    <parent link="base_footprint"/>
+    <child link="robot_base"/>
+  </joint>
+  <!-- BASE-LINK -->
+  
+  <link
+    name="robot_base">
+    <inertial>
+      <origin
+        xyz="-7.2312E-07 -0.0056845 0.048085"
+        rpy="0 0 0" />
+      <mass
+        value="13.997" />
+      <inertia
+        ixx="0.50582"
+        ixy="-3.1746E-09"
+        ixz="1.1957E-11"
+        iyy="0.38285"
+        iyz="6.1462E-06"
+        izz="0.88755" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_do_an/meshes/robot_base.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_do_an/meshes/robot_base.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="robot_base">
+    <material>Gazebo/Gray</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  <link
+    name="right_wheel">
+    <inertial>
+      <origin
+        xyz="-0.00019487 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.35316" />
+      <inertia
+        ixx="0.00057446"
+        ixy="-4.4367E-19"
+        ixz="2.7968E-19"
+        iyy="0.00030435"
+        iyz="-1.0268E-20"
+        izz="0.00030435" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_do_an/meshes/right_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_do_an/meshes/right_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="right_wheel">
+    <mu1 value="1.0"/>
+    <mu2 value="1.0"/>
+    <kp value="10000000.0"/>
+    <kd value="1.0"/>
+    <fdir1 value="1 0 0"/>
+    <material>Gazebo/Dark</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  <joint
+    name="right_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="0.25 -0.3 0.05"
+      rpy="0 0 0" />
+    <parent
+      link="robot_base" />
+    <child
+      link="right_wheel" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      effort="40"
+      velocity="20" />
+    <dynamics
+      damping="1"
+      friction="0.1" />
+  </joint>
+  <transmission name="right_wheel_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_wheel_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="right_wheel_joint_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <link
+    name="left_wheel">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.35316" />
+      <inertia
+        ixx="0.00057446"
+        ixy="-2.8201E-20"
+        ixz="1.1336E-20"
+        iyy="0.00030435"
+        iyz="-1.3553E-20"
+        izz="0.00030435" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_do_an/meshes/right_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_do_an/meshes/right_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="left_wheel">
+    <mu1 value="1.0"/>
+    <mu2 value="1.0"/>
+    <kp value="10000000.0"/>
+    <kd value="1.0"/>
+    <fdir1 value="1 0 0"/>
+    <material>Gazebo/Dark</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  <joint
+    name="left_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="-0.25 -0.3 0.05"
+      rpy="0 0 0" />
+    <parent
+      link="robot_base" />
+    <child
+      link="left_wheel" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      effort="40"
+      velocity="20" />
+    <dynamics
+      damping="1"
+      friction="0.1" />
+  </joint>
+  <transmission name="left_wheel_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_wheel_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="left_wheel_joint_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <link
+    name="link_1">
+    <inertial>
+      <origin
+        xyz="8.4677E-05 -0.068159 0"
+        rpy="0 0 0" />
+      <mass
+        value="6.3121" />
+      <inertia
+        ixx="0.023601"
+        ixy="-7.9977E-05"
+        ixz="4.7533E-19"
+        iyy="0.026795"
+        iyz="-1.2433E-17"
+        izz="0.021379" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_do_an/meshes/link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_do_an/meshes/link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="link_1">
+    <mu1 value="1.0"/>
+    <mu2 value="1.0"/>
+    <kp value="10000000.0"/>
+    <kd value="1.0"/>
+    <fdir1 value="1 0 0"/>
+    <material>Gazebo/Green</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  <joint
+    name="joint_1"
+    type="continuous">
+    <origin
+      xyz="0 0 0.157"
+      rpy="1.5708 0 0" />
+    <parent
+      link="robot_base" />
+    <child
+      link="link_1" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="50"
+      velocity="10" />
+    <dynamics
+      damping="2"
+      friction="0.5" />
+  </joint>
+  <transmission name="joint1_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="joint1_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <link
+    name="link_2">
+    <inertial>
+      <origin
+        xyz="0.25911 -3.2672E-06 -3.0706E-07"
+        rpy="0 0 0" />
+      <mass
+        value="7.3625" />
+      <inertia
+        ixx="0.0068616"
+        ixy="1.3836E-06"
+        ixz="-1.4024E-07"
+        iyy="0.30711"
+        iyz="2.2307E-07"
+        izz="0.30718" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_do_an/meshes/link_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 1 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_do_an/meshes/link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="link_2">
+    <mu1 value="1.0"/>
+    <mu2 value="1.0"/>
+    <kp value="10000000.0"/>
+    <kd value="1.0"/>
+    <fdir1 value="1 0 0"/>
+    <material>Gazebo/Blue</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  <joint
+    name="joint_2"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="link_1" />
+    <child
+      link="link_2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-0.1"
+      upper="3.25"
+      effort="50"
+      velocity="10" />
+    <dynamics
+      damping="0.2"
+      friction="0.5" />
+  </joint>
+  <transmission name="joint2_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="joint2_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <link
+    name="link_3">
+    <inertial>
+      <origin
+        xyz="1.1455E-09 1.5585E-10 0.21926"
+        rpy="0 0 0" />
+      <mass
+        value="5.4822" />
+      <inertia
+        ixx="0.066031"
+        ixy="3.0959E-10"
+        ixz="1.0869E-09"
+        iyy="0.065845"
+        iyz="-1.9771E-11"
+        izz="0.0070913" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_do_an/meshes/link_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_do_an/meshes/link_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="link_3">
+    <mu1 value="1.0"/>
+    <mu2 value="1.0"/>
+    <kp value="10000000.0"/>
+    <kd value="1.0"/>
+    <fdir1 value="1 0 0"/>
+    <material>Gazebo/Yellow</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  <joint
+    name="joint_3"
+    type="revolute">
+    <origin
+      xyz="0.6 0 0"
+      rpy="-1.5708 3.14156 0" />
+    <parent
+      link="link_2" />
+    <child
+      link="link_3" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-2.9"
+      upper="0.5"
+      effort="40"
+      velocity="15" />
+    <dynamics
+      damping="1.5"
+      friction="0.3" />
+  </joint>
+  <transmission name="joint3_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="joint3_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <link
+    name="link_4">
+    <inertial>
+      <origin
+        xyz="1.1102E-16 4.4409E-16 -0.1118"
+        rpy="0 0 0" />
+      <mass
+        value="2.9797" />
+      <inertia
+        ixx="0.015188"
+        ixy="-2.3466E-20"
+        ixz="4.58E-19"
+        iyy="0.013617"
+        iyz="3.7314E-17"
+        izz="0.0035667" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_do_an/meshes/link_4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_do_an/meshes/link_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="link_4">
+    <mu1 value="1.0"/>
+    <mu2 value="1.0"/>
+    <kp value="10000000.0"/>
+    <kd value="1.0"/>
+    <fdir1 value="1 0 0"/>
+    <material>Gazebo/Red</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  <joint
+    name="joint_4"
+    type="continuous">
+    <origin
+      xyz="0 0 0.61"
+      rpy="0 0 0" />
+    <parent
+      link="link_3" />
+    <child
+      link="link_4" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      effort="20"
+      velocity="25" />
+    <dynamics
+      damping="1.2"
+      friction="0.2" />
+  </joint>
+  <transmission name="joint4_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_4">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="joint4_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/robot_do_an</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+</robot>
