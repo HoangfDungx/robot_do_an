@@ -4,7 +4,7 @@ from __future__ import print_function
 
 import threading
 
-import roslib; roslib.load_manifest('teleop_twist_keyboard')
+import roslib#; roslib.load_manifest('teleop_twist_keyboard')
 import rospy
 
 from robot_do_an.msg import Torque
@@ -48,6 +48,10 @@ class PublishThread(threading.Thread):
         # self.publisher = rospy.Publisher('cmd_torque', Torque, queue_size=6)
         self.left_pub = rospy.Publisher('/robot_do_an/left_wheel_controller/command', Float64, queue_size=1)
         self.right_pub = rospy.Publisher('/robot_do_an/right_wheel_controller/command', Float64, queue_size=1)
+        self.joint1_pub = rospy.Publisher('/robot_do_an/joint1_controller/command', Float64, queue_size=1)
+        self.joint2_pub = rospy.Publisher('/robot_do_an/joint2_controller/command', Float64, queue_size=1)
+        self.joint3_pub = rospy.Publisher('/robot_do_an/joint3_controller/command', Float64, queue_size=1)
+        self.joint4_pub = rospy.Publisher('/robot_do_an/joint4_controller/command', Float64, queue_size=1)
         self.left_wheel = 0.0
         self.right_wheel = 0.0
         self.theta1 = 0.0
@@ -55,7 +59,7 @@ class PublishThread(threading.Thread):
         self.theta3 = 0.0
         self.theta4 = 0.0
         self.speed_wheel = -100.0
-        self.speed_joint = 50.0
+        self.speed_joint = 0.05
         self.condition = threading.Condition()
         self.done = False
 
@@ -117,6 +121,10 @@ class PublishThread(threading.Thread):
             # self.publisher.publish(cmd)
             self.left_pub.publish(self.left_wheel*self.speed_wheel)
             self.right_pub.publish(self.right_wheel*self.speed_wheel)
+            self.joint1_pub.publish(self.theta1*self.speed_joint)
+            self.joint2_pub.publish(self.theta2*self.speed_joint)
+            self.joint3_pub.publish(self.theta3*self.speed_joint)
+            self.joint4_pub.publish(self.theta4*self.speed_joint)
 
         # Publish stop message when thread exits.
             cmd.left_wheel = 0
@@ -128,6 +136,10 @@ class PublishThread(threading.Thread):
         # self.publisher.publish(cmd)
         self.left_pub.publish(0)
         self.right_pub.publish(0)
+        self.joint1_pub.publish(0)
+        self.joint2_pub.publish(0)
+        self.joint3_pub.publish(0)
+        self.joint4_pub.publish(0)
 
 def getKey(key_timeout):
     tty.setraw(sys.stdin.fileno())
@@ -172,14 +184,14 @@ if __name__=="__main__":
             if key in moveBindings.keys():
                 left_wheel = moveBindings[key][0]
                 right_wheel = moveBindings[key][1]
-                theta1 = moveBindings[key][2]
-                theta2 = moveBindings[key][3]
-                theta3 = moveBindings[key][4]
-                theta4 = moveBindings[key][5]
+                theta1 += moveBindings[key][2]
+                theta2 += moveBindings[key][3]
+                theta3 += moveBindings[key][4]
+                theta4 += moveBindings[key][5]
 
-                if (status == 14):
-                    print(msg)
-                status = (status + 1) % 15
+                # if (status == 14):
+                #     print(msg)
+                # status = (status + 1) % 15
             else:
                 # Skip updating cmd_vel if key timeout and robot already
                 # stopped.
@@ -193,8 +205,8 @@ if __name__=="__main__":
                 theta4=0
                 if (key == '\x03'):
                     break
- 
             pub_thread.update(left_wheel,right_wheel,theta1,theta2,theta3,theta4)
+            # pub_thread.run()
 
     except Exception as e:
         print(e)

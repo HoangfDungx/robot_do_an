@@ -8,7 +8,7 @@
     textfile="$(find robot_do_an)/urdf/robot_do_an.urdf" />
   <!-- load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="/robot_do_an" args="left_wheel_controller right_wheel_controller joint_state_controller"/>
+    output="screen" ns="/robot_do_an" args="left_wheel_controller right_wheel_controller joint_state_controller joint1_controller joint2_controller joint3_controller joint4_controller"/>
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
 	  respawn="false" output="screen">

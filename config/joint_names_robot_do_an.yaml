@@ -6,10 +6,26 @@ robot_do_an:
     publish_rate: 50  
   # Effort Controllers -----------------------------------------
   left_wheel_controller:
-    type: effort_controllers/JointVelocityController
+    type: effort_controllers/JointEffortController
     joint: left_wheel_joint
     pid: {p: 100.0, i: 0.01, d: 10.0}
   right_wheel_controller:
-    type: effort_controllers/JointVelocityController
+    type: effort_controllers/JointEffortController
     joint: right_wheel_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint1_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint2_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_2
+    pid: {p: 1000.0, i: 0.01, d: 100.0}
+  joint3_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint4_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_4
     pid: {p: 100.0, i: 0.01, d: 10.0}
